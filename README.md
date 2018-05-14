@@ -12,8 +12,8 @@ Clone this repository:
 ```
 git clone https://github.com/NNToan-apcs/Hyperledger-Composer.git
 ```
-Go to toan-fabric-network folder:
+Go to iot-network folder:
 ```
-cd toan-fabric-network
+cd iot-network
 ```
 Continue to read the instruction in README.md in that folder
