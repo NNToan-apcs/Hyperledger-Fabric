@@ -10,7 +10,12 @@ Hyperledger Project source code files are made available under the Apache Licens
 
 Clone this repository:
 ```
-git clone https://github.com/NNToan-apcs/Hyperledger-Composer.git
+git clone https://github.com/NNToan-apcs/Hyperledger-Fabric.git
+cd Hyperledger-Fabric
+```
+Download Prerequisites:
+```
+curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0
 ```
 Go to iot-network folder:
 ```
