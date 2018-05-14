@@ -1,5 +1,19 @@
-## Build Your First Network (BYFN)
+## Hyperledger Fabric
 
-The directions for using this are documented in the Hyperledger Fabric
-["Build Your First Network"](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) tutorial.
-# Hyperledger-Fabric
+This project is start from IBM Hyperledger fabric-samples (https://github.com/NNToan-apcs/fabric-samples).
+
+## License <a name="license"></a>
+
+Hyperledger Project source code files are made available under the Apache License, Version 2.0 (Apache-2.0), located in the [LICENSE](LICENSE) file. Hyperledger Project documentation files are made available under the Creative Commons Attribution 4.0 International License (CC-BY-4.0), available at http://creativecommons.org/licenses/by/4.0/.
+
+## How to use
+
+Clone this repository:
+```
+git clone https://github.com/NNToan-apcs/Hyperledger-Composer.git
+```
+Go to toan-fabric-network folder:
+```
+cd toan-fabric-network
+```
+Continue to read the instruction in README.md in that folder
