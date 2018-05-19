@@ -3,8 +3,10 @@ Reference:
 (https://github.com/CATechnologies/blockchain-tutorials/wiki/Tutorial:-Hyperledger-Fabric-v1.1-%E2%80%93-Create-a-Development-Business-NeTwork-on-zLinux)
 
 
-Add downloaded binaries to your PATH environment variable so that these can be picked up without fully qualifying the path to each binary:
+Add downloaded binaries to your PATH environment variable so that these can be picked up without fully qualifying the path to each binary(type cryptogen in terminal to check if it is the correct path):
 ```
+#export PATH=<path to download location>/bin:$PATH
+#export PATH=~/Hyperledger/toan-fabric-network/fabric-samples/bin:$PATH
 export PATH=~/Hyperledger-Fabric/fabric-samples/bin:$PATH
 ```
 
