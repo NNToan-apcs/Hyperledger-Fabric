@@ -7,11 +7,11 @@ npm: v5.6.0 or above
 node: v9.10.1 or above
 
 #Get docker images
-'''
+```
 ./bin/get-docker-images.sh
-'''
+```
 
 #Go in the network folder
-'''
+```
 cd iot-network
-'''
+```
