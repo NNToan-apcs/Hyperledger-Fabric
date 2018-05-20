@@ -5,11 +5,18 @@
 
 version: '2'
 
+volumes:
+  orderer.iot.net:
+  peer0.org1.iot.net:
+  peer1.org1.iot.net:
+  peer0.org2.iot.net:
+  peer1.org2.iot.net:
+
 networks:
   iotn:
 services:
   ca0:
-    image: hyperledger/fabric-ca
+    image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-org1
@@ -26,7 +33,7 @@ services:
       - iotn
 
   ca1:
-    image: hyperledger/fabric-ca
+    image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-org2

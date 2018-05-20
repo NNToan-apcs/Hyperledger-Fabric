@@ -7,7 +7,7 @@
 
 # This script is designed to be run in the org3cli container as the
 # second step of the EYFN tutorial. It joins the org3 peers to the
-# channel previously setup in the BYFN tutorial and install the
+# channel previously setup in the iotn tutorial and install the
 # chaincode as version 2.0 on peer0.org3.
 #
 

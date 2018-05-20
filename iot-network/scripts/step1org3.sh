@@ -8,7 +8,7 @@
 # This script is designed to be run in the org3cli container as the
 # first step of the EYFN tutorial.  It creates and submits a
 # configuration transaction to add org3 to the network previously
-# setup in the BYFN tutorial.
+# setup in the iotn tutorial.
 #
 
 CHANNEL_NAME="$1"

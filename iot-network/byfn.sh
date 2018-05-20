@@ -34,8 +34,8 @@ export FABRIC_CFG_PATH=${PWD}
 # Print the usage message
 function printHelp () {
   echo "Usage: "
-  echo "  byfn.sh up|down|restart|generate|upgrade [-c <channel name>] [-t <timeout>] [-d <delay>] [-f <docker-compose-file>] [-s <dbtype>] [-i <imagetag>]"
-  echo "  byfn.sh -h|--help (print this message)"
+  echo "  iotn.sh up|down|restart|generate|upgrade [-c <channel name>] [-t <timeout>] [-d <delay>] [-f <docker-compose-file>] [-s <dbtype>] [-i <imagetag>]"
+  echo "  iotn.sh -h|--help (print this message)"
   echo "    <mode> - one of 'up', 'down', 'restart' or 'generate'"
   echo "      - 'up' - bring up the network with docker-compose up"
   echo "      - 'down' - clear the network with docker-compose down"
@@ -53,17 +53,17 @@ function printHelp () {
   echo "Typically, one would first generate the required certificates and "
   echo "genesis block, then bring up the network. e.g.:"
   echo
-  echo "	byfn.sh generate -c mychannel"
-  echo "	byfn.sh up -c mychannel -s couchdb"
-  echo "        byfn.sh up -c mychannel -s couchdb -i 1.1.0-alpha"
-  echo "	byfn.sh up -l node"
-  echo "	byfn.sh down -c mychannel"
-  echo "        byfn.sh upgrade -c mychannel"
+  echo "	iotn.sh generate -c mychannel"
+  echo "	iotn.sh up -c mychannel -s couchdb"
+  echo "        iotn.sh up -c mychannel -s couchdb -i 1.1.0-alpha"
+  echo "	iotn.sh up -l node"
+  echo "	iotn.sh down -c mychannel"
+  echo "        iotn.sh upgrade -c mychannel"
   echo
   echo "Taking all defaults:"
-  echo "	byfn.sh generate"
-  echo "	byfn.sh up"
-  echo "	byfn.sh down"
+  echo "	iotn.sh generate"
+  echo "	iotn.sh up"
+  echo "	iotn.sh down"
 }
 
 # Ask user for confirmation to proceed
@@ -132,13 +132,13 @@ function checkPrereqs() {
   for UNSUPPORTED_VERSION in $BLACKLISTED_VERSIONS ; do
      echo "$LOCAL_VERSION" | grep -q $UNSUPPORTED_VERSION
      if [ $? -eq 0 ] ; then
-       echo "ERROR! Local Fabric binary version of $LOCAL_VERSION does not match this newer version of BYFN and is unsupported. Either move to a later version of Fabric or checkout an earlier version of fabric-samples."
+       echo "ERROR! Local Fabric binary version of $LOCAL_VERSION does not match this newer version of iotn and is unsupported. Either move to a later version of Fabric or checkout an earlier version of fabric-samples."
        exit 1
      fi
 
      echo "$DOCKER_IMAGE_VERSION" | grep -q $UNSUPPORTED_VERSION
      if [ $? -eq 0 ] ; then
-       echo "ERROR! Fabric Docker image version of $DOCKER_IMAGE_VERSION does not match this newer version of BYFN and is unsupported. Either move to a later version of Fabric or checkout an earlier version of fabric-samples."
+       echo "ERROR! Fabric Docker image version of $DOCKER_IMAGE_VERSION does not match this newer version of iotn and is unsupported. Either move to a later version of Fabric or checkout an earlier version of fabric-samples."
        exit 1
      fi
   done

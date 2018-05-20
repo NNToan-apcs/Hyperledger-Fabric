@@ -8,7 +8,7 @@
 # This script is designed to be run in the org3cli container as the
 # final step of the EYFN tutorial. It simply issues a couple of
 # chaincode requests through the org3 peers to check that org3 was
-# properly added to the network previously setup in the BYFN tutorial.
+# properly added to the network previously setup in the iotn tutorial.
 #
 
 echo

@@ -9,7 +9,7 @@
 # step of the EYFN tutorial. It installs the chaincode as version 2.0
 # on peer0.org1 and peer0.org2, and uprage the chaincode on the
 # channel to version 2.0, thus completing the addition of org3 to the
-# network previously setup in the BYFN tutorial.
+# network previously setup in the iotn tutorial.
 #
 
 echo
