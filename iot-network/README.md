@@ -6,7 +6,7 @@ Reference:
 Add downloaded binaries to your PATH environment variable so that these can be picked up without fully qualifying the path to each binary:
 ```
 #export PATH=~/Hyperledger/toan-fabric-network/bin:$PATH
-export PATH=~/Hyperledger-Fabric/fabric-samples/bin:$PATH
+export PATH=~/Hyperledger-Fabric/bin:$PATH
 ```
 
 # Using script
@@ -19,6 +19,10 @@ To bring down network
 ./byfn -m down
 ```
 
+To extend the network (Add org3 to the network)
+```
+./eyfn -m up
+```
 # Using commands
 ## Create Hyperledger Fabric Business Network
 
