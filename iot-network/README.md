@@ -12,11 +12,11 @@ export PATH=~/Hyperledger-Fabric/bin:$PATH
 # Using script
 To bring up network
 ```
-./byfn -m up
+./iotn -m up
 ```
 To bring down network
 ```
-./byfn -m down
+./iotn -m down
 ```
 
 To extend the network (Add org3 to the network)
