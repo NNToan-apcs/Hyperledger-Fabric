@@ -163,6 +163,7 @@ function networkUp () {
     exit 1
   fi
   # now run the end to end script
+  export MSYS_NO_PATHCONV=1
   docker exec cli scripts/script.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT
   if [ $? -ne 0 ]; then
     echo "ERROR !!!! Test failed"
@@ -246,7 +247,7 @@ function networkDown () {
     # remove orderer block and other channel configuration transactions and certs
     rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config ./org3-artifacts/crypto-config/ channel-artifacts/org3.json
     # remove the docker-compose yaml file that was customized to the example
-    rm -f docker-compose-e2e.yaml
+    rm -f docker-compose-e2e.yaml docker-compose-cas.yaml
   fi
 }
 
@@ -265,21 +266,21 @@ function replacePrivateKey () {
 
   # Copy the template to the file that will be modified to add the private key
   cp docker-compose-e2e-template.yaml docker-compose-e2e.yaml
-
+  cp docker-compose-cas-template.yaml docker-compose-cas.yaml
   # The next steps will replace the template's contents with the
   # actual values of the private key file names for the two CAs.
   CURRENT_DIR=$PWD
   cd crypto-config/peerOrganizations/org1.iot.net/ca/
   PRIV_KEY=$(ls *_sk)
   cd "$CURRENT_DIR"
-  sed $OPTS "s/CA1_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
+  sed $OPTS "s/CA1_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml docker-compose-cas.yaml
   cd crypto-config/peerOrganizations/org2.iot.net/ca/
   PRIV_KEY=$(ls *_sk)
   cd "$CURRENT_DIR"
-  sed $OPTS "s/CA2_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
+  sed $OPTS "s/CA2_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml docker-compose-cas.yaml
   # If MacOSX, remove the temporary backup of the docker-compose file
   if [ "$ARCH" == "Darwin" ]; then
-    rm docker-compose-e2e.yamlt
+    rm docker-compose-e2e.yamlt docker-compose-cas.yamlt
   fi
 }
 
@@ -441,7 +442,7 @@ COMPOSE_FILE=docker-compose-cli.yaml
 #
 COMPOSE_FILE_COUCH=docker-compose-couch.yaml
 #
-COMPOSE_FILE_CA=docker-compose-e2e.yaml
+COMPOSE_FILE_CA=docker-compose-cas.yaml
 # use golang as the default language for chaincode
 LANGUAGE=golang
 # default image tag
