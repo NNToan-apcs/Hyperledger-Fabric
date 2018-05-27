@@ -7,7 +7,7 @@
 
 # This script extends the Hyperledger Fabric By Your First Network by
 # adding a third organization to the network previously setup in the
-# BYFN tutorial.
+# iotn tutorial.
 #
 
 # prepending $PWD/../bin to PATH to ensure we are picking up the correct binaries
@@ -169,7 +169,7 @@ function createConfigTx () {
 
 # We use the cryptogen tool to generate the cryptographic material
 # (x509 certs) for the new org.  After we run the tool, the certs will
-# be parked in the BYFN folder titled ``crypto-config``.
+# be parked in the iotn folder titled ``crypto-config``.
 
 # Generates Org3 certs using cryptogen tool
 function generateCerts (){
@@ -222,10 +222,10 @@ function generateChannelArtifacts() {
 }
 
 
-# If BYFN wasn't run abort
+# If iotn wasn't run abort
 if [ ! -d crypto-config ]; then
   echo
-  echo "ERROR: Please, run byfn.sh first."
+  echo "ERROR: Please, run iotn.sh first."
   echo
   exit 1
 fi

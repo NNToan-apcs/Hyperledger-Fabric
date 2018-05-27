@@ -18,7 +18,10 @@ iot-network/ledgers
 iot-network/ledgers-backup
 iot-network/org3-artifacts/
 iot-network/connection/
-
+base/*.1.yaml
+base/*.2.yaml
+*.1.yaml
+*.2.yaml
 chaincode-docker-devmode/myc.block
 chaincode-docker-devmode/chaincode/sacc/sacc
 chaincode-docker-devmode/chaincode/chaincode_example02/chaincode_example02
