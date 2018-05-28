@@ -14,10 +14,14 @@ iot-network/channel-artifacts/*.block
 iot-network/channel-artifacts/org3.json
 iot-network/crypto-config/*
 iot-network/docker-compose-e2e.yaml
+iot-network/docker-compose-cas.yaml
 iot-network/ledgers
 iot-network/ledgers-backup
 iot-network/org3-artifacts/
 iot-network/connection/
+iot-network/PeerAdmin@toan-network-org1.card
+iot-network/PeerAdmin@toan-network-org2.card
+
 base/*.1.yaml
 base/*.2.yaml
 *.1.yaml
