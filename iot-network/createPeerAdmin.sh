@@ -6,7 +6,8 @@ mkdir -p connection/org2
 #variables
 HOST=grpcs://localhost
 CURRENT_DIR=$PWD
-
+CONNECTION_ORG1=connection/org1
+CONNECTION_ORG2=connection/org2
 #ORG1
 TLS_CA_ORG1=$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' crypto-config/peerOrganizations/org1.iot.net/peers/peer0.org1.iot.net/tls/ca.crt) 
 
@@ -19,19 +20,18 @@ TLS_CA_ORDERER=$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' crypto-config/orde
 #Get admins
 export ORG1=crypto-config/peerOrganizations/org1.iot.net/users/Admin@org1.iot.net/msp
 
-cp -p $ORG1/signcerts/A*.pem ~/Hyperledger/toan-fabric-network/iot-network/connection/org1
-rm -rf ~/Hyperledger/toan-fabric-network/iot-network/connection/org1/*_sk
-cp -p $ORG1/keystore/*_sk  ~/Hyperledger/toan-fabric-network/iot-network/connection/org1
+cp -p $ORG1/signcerts/A*.pem $CONNECTION_ORG1
+rm -rf $CONNECTION_ORG1/*_sk
+cp -p $ORG1/keystore/*_sk  $CONNECTION_ORG1
 
 export ORG2=crypto-config/peerOrganizations/org2.iot.net/users/Admin@org2.iot.net/msp
 
-cp -p $ORG2/signcerts/A*.pem  ~/Hyperledger/toan-fabric-network/iot-network/connection/org2
-rm -rf ~/Hyperledger/toan-fabric-network/iot-network/connection/org2/*_sk
-cp -p $ORG2/keystore/*_sk  ~/Hyperledger/toan-fabric-network/iot-network/connection/org2
+cp -p $ORG2/signcerts/A*.pem  $CONNECTION_ORG2
+rm -rf $CONNECTION_ORG2/*_sk
+cp -p $ORG2/keystore/*_sk  $CONNECTION_ORG2
 
 #create connection files
-CONNECTION_ORG1=connection/org1
-CONNECTION_ORG2=connection/org2
+
 rm -rf $CONNECTION_ORG1/toan-network-org1.json
 rm -rf $CONNECTION_ORG2/toan-network-org2.json
 cat << EOF > $CONNECTION_ORG1/toan-network-org1.json

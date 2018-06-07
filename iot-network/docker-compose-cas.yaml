@@ -15,10 +15,10 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca-org1
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.iot.net-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/60c68dee81c1a627eb62fda1936800ed4b3efb3bfc5d357bd9ef7387df19f0ac_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6cd0c405d8f6a1134f5f9952e6e4135c74a3de0fb5713a1e0b76b1108a91aaab_sk
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.iot.net-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/60c68dee81c1a627eb62fda1936800ed4b3efb3bfc5d357bd9ef7387df19f0ac_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.iot.net-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/6cd0c405d8f6a1134f5f9952e6e4135c74a3de0fb5713a1e0b76b1108a91aaab_sk -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org1.iot.net/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_peerOrg1
@@ -32,10 +32,10 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca-org2
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.iot.net-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/53ae7b91ad4cd62514762e449f55fab165d1b1c675cbce8398192974dd383c26_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e03f63194c5d0d3fca30896b01087e2fce78a5fe49b918da00f07c82266ffa28_sk
     ports:
       - "8054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.iot.net-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/53ae7b91ad4cd62514762e449f55fab165d1b1c675cbce8398192974dd383c26_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.iot.net-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/e03f63194c5d0d3fca30896b01087e2fce78a5fe49b918da00f07c82266ffa28_sk -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org2.iot.net/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_peerOrg2

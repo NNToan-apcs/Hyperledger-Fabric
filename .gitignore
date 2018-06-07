@@ -18,8 +18,8 @@ iot-network/docker-compose-cas.yaml
 iot-network/ledgers
 iot-network/ledgers-backup
 iot-network/org3-artifacts/
-iot-network/connection/org1
-iot-network/connection/org2
+iot-network/connection/org1/*
+iot-network/connection/org2/*
 iot-network/connection/ca-orderer.txt
 
 iot-network/PeerAdmin@toan-network-org1.card

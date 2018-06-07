@@ -6,6 +6,7 @@ Reference:
 Add downloaded binaries to your PATH environment variable so that these can be picked up without fully qualifying the path to each binary:
 ```
 #export PATH=~/Hyperledger/toan-fabric-network/bin:$PATH
+#export PATH=~/Desktop/hyperledger/Hyperledger-Fabric/bin:$PATH
 export PATH=~/Hyperledger-Fabric/bin:$PATH
 ```
 
