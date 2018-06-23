@@ -178,3 +178,30 @@ Peer1 of Org2:
 ```
 CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.iot.net/users/Admin@org2.iot.net/msp CORE_PEER_ADDRESS=peer1.org2.iot.net:7051 CORE_PEER_LOCALMSPID="Org2MSP" CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.iot.net/peers/peer1.org2.iot.net/tls/ca.crt peer chaincode invoke -o orderer.iot.net:7050  --tls 
 ```
+
+
+DRAFT
+```
+export CHANNEL_NAME=abc
+
+CORE_PEER_LOCALMSPID="Org1MSP"
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.iot.net/peers/peer0.org1.iot.net/tls/ca.crt
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.iot.net/users/Admin@org1.iot.net/msp
+CORE_PEER_ADDRESS=peer2.org1.iot.net:7051
+
+peer channel join -b abc.block
+
+
+export CHANNEL_NAME=abc
+
+CORE_PEER_LOCALMSPID="Org2MSP"
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.iot.net/peers/peer0.org2.iot.net/tls/ca.crt
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.iot.net/users/Admin@org2.iot.net/msp
+CORE_PEER_ADDRESS=peer2.org2.iot.net:7051
+
+peer channel join -b abc.block
+```

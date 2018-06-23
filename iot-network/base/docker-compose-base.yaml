@@ -38,6 +38,7 @@ services:
       file: peer-base.yaml
       service: peer-base
     environment:
+      - CORE_CHAINCODE_EXECUTETIMEOUT=90s
       - CORE_PEER_ID=peer0.org1.iot.net
       - CORE_PEER_ADDRESS=peer0.org1.iot.net:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org1.iot.net:7051
