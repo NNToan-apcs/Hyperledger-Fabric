@@ -31,5 +31,5 @@ base/*.2.yaml
 *.2.yaml
 chaincode-docker-devmode/myc.block
 chaincode-docker-devmode/chaincode/sacc/sacc
-chaincode-docker-devmode/chaincode/chaincode_example02/chaincode_example02
+#chaincode-docker-devmode/chaincode/chaincode_example02/chaincode_example02
 
