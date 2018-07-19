@@ -8,6 +8,7 @@ HOST=grpcs://localhost
 CURRENT_DIR=$PWD
 CONNECTION_ORG1=connection/org1
 CONNECTION_ORG2=connection/org2
+CHANNEL_NAME=toanchannel
 #ORG1
 TLS_CA_ORG1=$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' crypto-config/peerOrganizations/org1.iot.net/peers/peer0.org1.iot.net/tls/ca.crt) 
 
@@ -36,7 +37,7 @@ rm -rf $CONNECTION_ORG1/toan-network-org1.json
 rm -rf $CONNECTION_ORG2/toan-network-org2.json
 cat << EOF > $CONNECTION_ORG1/toan-network-org1.json
 {
-    "name": "toan-network",
+    "name": "$CHANNEL_NAME",
     "x-type": "hlfv1",
     "version": "1.0.0",
     "client": {
@@ -194,7 +195,7 @@ cat << EOF > $CONNECTION_ORG2/toan-network-org2.json
         }
     },
     "channels": {
-        "abc": {
+        "$CHANNEL_NAME": {
             "orderers": [
                 "orderer.iot.net"
             ],
