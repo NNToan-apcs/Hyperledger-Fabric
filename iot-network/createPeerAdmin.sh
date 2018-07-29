@@ -8,7 +8,25 @@ HOST=grpcs://localhost
 CURRENT_DIR=$PWD
 CONNECTION_ORG1=connection/org1
 CONNECTION_ORG2=connection/org2
-CHANNEL_NAME=toanchannel
+CHANNEL_NAME=mychannel
+NETWORK=toan-network
+
+while getopts "h?c:n:" opt; do
+  case "$opt" in
+    h|\?)
+      echo "Please use this following format:"
+      echo "./createPeerAdmin.sh -c <ChannelName> -n <NetworkName>"
+      echo "Default ChannelName: mychannel"
+      echo "Default NetworkName: toan-network"
+      exit 0
+    ;;
+    c)  CHANNEL_NAME=$OPTARG
+    ;;
+    n)  NETWORK=$OPTARG
+    ;;
+  esac
+done
+
 #ORG1
 TLS_CA_ORG1=$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' crypto-config/peerOrganizations/org1.iot.net/peers/peer0.org1.iot.net/tls/ca.crt) 
 
@@ -33,11 +51,11 @@ cp -p $ORG2/keystore/*_sk  $CONNECTION_ORG2
 
 #create connection files
 
-rm -rf $CONNECTION_ORG1/toan-network-org1.json
-rm -rf $CONNECTION_ORG2/toan-network-org2.json
-cat << EOF > $CONNECTION_ORG1/toan-network-org1.json
+rm -rf $CONNECTION_ORG1/$NETWORK-org1.json
+rm -rf $CONNECTION_ORG2/$NETWORK-org2.json
+cat << EOF > $CONNECTION_ORG1/$NETWORK-org1.json
 {
-    "name": "$CHANNEL_NAME",
+    "name": "$NETWORK",
     "x-type": "hlfv1",
     "version": "1.0.0",
     "client": {
@@ -54,7 +72,7 @@ cat << EOF > $CONNECTION_ORG1/toan-network-org1.json
         }
     },
     "channels": {
-        "abc": {
+        "$CHANNEL_NAME": {
             "orderers": [
                 "orderer.iot.net"
             ],
@@ -176,9 +194,9 @@ cat << EOF > $CONNECTION_ORG1/toan-network-org1.json
 }
 EOF
 
-cat << EOF > $CONNECTION_ORG2/toan-network-org2.json
+cat << EOF > $CONNECTION_ORG2/$NETWORK-org2.json
 {
-    "name": "toan-network",
+    "name": "$NETWORK",
     "x-type": "hlfv1",
     "version": "1.0.0",
     "client": {
@@ -316,15 +334,15 @@ cat << EOF > $CONNECTION_ORG2/toan-network-org2.json
     }
 }
 EOF
-composer card create -p $CONNECTION_ORG1/toan-network-org1.json -u PeerAdmin1 -c $CONNECTION_ORG1/Admin@org1.iot.net-cert.pem -k $CONNECTION_ORG1/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@toan-network-org1.card
-composer card create -p $CONNECTION_ORG2/toan-network-org2.json -u PeerAdmin2 -c $CONNECTION_ORG2/Admin@org2.iot.net-cert.pem -k $CONNECTION_ORG2/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@toan-network-org2.card
+composer card create -p $CONNECTION_ORG1/$NETWORK-org1.json -u PeerAdmin1 -c $CONNECTION_ORG1/Admin@org1.iot.net-cert.pem -k $CONNECTION_ORG1/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@$NETWORK-org1.card
+composer card create -p $CONNECTION_ORG2/$NETWORK-org2.json -u PeerAdmin2 -c $CONNECTION_ORG2/Admin@org2.iot.net-cert.pem -k $CONNECTION_ORG2/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@$NETWORK-org2.card
 
-if composer card list -c PeerAdmin@toan-network-org1 > /dev/null; then
-    composer card delete -c PeerAdmin@toan-network-org1
+if composer card list -c PeerAdmin@$NETWORK-org1 > /dev/null; then
+    composer card delete -c PeerAdmin@$NETWORK-org1
 fi
 
-if composer card list -c PeerAdmin@toan-network-org2 > /dev/null; then
-    composer card delete -c PeerAdmin@toan-network-org2
+if composer card list -c PeerAdmin@$NETWORK-org2 > /dev/null; then
+    composer card delete -c PeerAdmin@$NETWORK-org2
 fi
-composer card import -f PeerAdmin@toan-network-org1.card --card PeerAdmin@toan-network-org1
-composer card import -f PeerAdmin@toan-network-org2.card --card PeerAdmin@toan-network-org2
+composer card import -f PeerAdmin@$NETWORK-org1.card --card PeerAdmin@$NETWORK-org1
+composer card import -f PeerAdmin@$NETWORK-org2.card --card PeerAdmin@$NETWORK-org2
