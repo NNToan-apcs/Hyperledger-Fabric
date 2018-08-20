@@ -1,0 +1,138 @@
+{
+    "name": "toan-network",
+    "x-type": "hlfv1",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Org2",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300",
+                    "eventHub": "300",
+                    "eventReg": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    },
+    "channels": {
+        "abc": {
+            "orderers": [
+                "orderer.iot.net"
+            ],
+            "peers": {
+                "peer0.org1.iot.net": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                },
+                "peer1.org1.iot.net": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                },
+                "peer0.org2.iot.net": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                },
+                "peer1.org2.iot.net": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Org1": {
+            "mspid": "Org1MSP",
+            "peers": [
+                "peer0.org1.iot.net",
+                "peer1.org1.iot.net"
+            ],
+            "certificateAuthorities": [
+                "ca.org1.iot.net"
+            ]
+        },
+        "Org2": {
+            "mspid": "Org2MSP",
+            "peers": [
+                "peer0.org2.iot.net",
+                "peer1.org2.iot.net"
+            ],
+            "certificateAuthorities": [
+                "ca.org2.iot.net"
+            ]
+        }
+    },
+    "orderers": {
+        "orderer.iot.net": {
+            "url": "grpcs://localhost:7050",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer.iot.net"
+            },
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICJjCCAcygAwIBAgIRALaX8bMQEyBT+XXOrUlgVzQwCgYIKoZIzj0EAwIwZDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xEDAOBgNVBAoTB2lvdC5uZXQxFjAUBgNVBAMTDXRsc2NhLmlvdC5u\nZXQwHhcNMTgwODIwMTcwNzQwWhcNMjgwODE3MTcwNzQwWjBkMQswCQYDVQQGEwJV\nUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEQ\nMA4GA1UEChMHaW90Lm5ldDEWMBQGA1UEAxMNdGxzY2EuaW90Lm5ldDBZMBMGByqG\nSM49AgEGCCqGSM49AwEHA0IABA7w2gdC1nOkVQSxJF+CJeHNUSxpy2ffRCCVwNcV\nLXtmPVfF8A2bVI8GvAc19vVJvN8aLkbXGGQIWYYuqFdq0PyjXzBdMA4GA1UdDwEB\n/wQEAwIBpjAPBgNVHSUECDAGBgRVHSUAMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0O\nBCIEIBANZpuAzKwnCtEaYsgHAztCvkZMs0mBW6GTei7sJ278MAoGCCqGSM49BAMC\nA0gAMEUCIQD2D726Xj1vgnZLt4BUx9ybH8KgGL5XaDU0WjRUbYCbogIgSoEGtYNQ\nb+ahDqZ1VbL8PXOt4gEABQoEgMpyrPrDlVM=\n-----END CERTIFICATE-----\n"
+            }
+        }
+    },
+    "peers": {
+        "peer0.org1.iot.net": {
+            "url": "grpcs://localhost:7051",
+            "eventUrl": "grpcs://localhost:7053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.org1.iot.net"
+            },
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICOjCCAeCgAwIBAgIRAKpCdhyNjoTbM3m2CquAvekwCgYIKoZIzj0EAwIwbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzEuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMS5pb3QubmV0MB4XDTE4MDgyMDE3MDc0MFoXDTI4MDgxNzE3MDc0MFowbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzEuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMS5pb3QubmV0MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEtEBfm1hTHUl6\noOF0FaJHQpfPwdDDdiuU3bujq+QjVyMD3lJXjW9154GhOBN74KGytohIdrMwYL06\nRswsBliJHqNfMF0wDgYDVR0PAQH/BAQDAgGmMA8GA1UdJQQIMAYGBFUdJQAwDwYD\nVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgZumsHEcfnejjTj+X9kjZxqQXa5ZtmXNY\ntnotdyu4qqowCgYIKoZIzj0EAwIDSAAwRQIhAOYVvVrlf0WYj0B39JjBadeDlBt8\nkJPZ7zePZkkr4JlJAiAS+HJJg6QTI2pDoLE8bciSvy2RAbqnfFyd1mU5qd1oAg==\n-----END CERTIFICATE-----\n"
+            }
+        },
+        "peer1.org1.iot.net": {
+            "url": "grpcs://localhost:8051",
+            "eventUrl": "grpcs://localhost:8053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.org1.iot.net"
+            },
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICOjCCAeCgAwIBAgIRAKpCdhyNjoTbM3m2CquAvekwCgYIKoZIzj0EAwIwbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzEuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMS5pb3QubmV0MB4XDTE4MDgyMDE3MDc0MFoXDTI4MDgxNzE3MDc0MFowbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzEuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMS5pb3QubmV0MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEtEBfm1hTHUl6\noOF0FaJHQpfPwdDDdiuU3bujq+QjVyMD3lJXjW9154GhOBN74KGytohIdrMwYL06\nRswsBliJHqNfMF0wDgYDVR0PAQH/BAQDAgGmMA8GA1UdJQQIMAYGBFUdJQAwDwYD\nVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgZumsHEcfnejjTj+X9kjZxqQXa5ZtmXNY\ntnotdyu4qqowCgYIKoZIzj0EAwIDSAAwRQIhAOYVvVrlf0WYj0B39JjBadeDlBt8\nkJPZ7zePZkkr4JlJAiAS+HJJg6QTI2pDoLE8bciSvy2RAbqnfFyd1mU5qd1oAg==\n-----END CERTIFICATE-----\n"
+            }
+        },
+        "peer0.org2.iot.net": {
+            "url": "grpcs://localhost:9051",
+            "eventUrl": "grpcs://localhost:9053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.org2.iot.net"
+            },
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICOTCCAeCgAwIBAgIRAMggyjddsIQDf/EEWpMMuCAwCgYIKoZIzj0EAwIwbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzIuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMi5pb3QubmV0MB4XDTE4MDgyMDE3MDc0MFoXDTI4MDgxNzE3MDc0MFowbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzIuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMi5pb3QubmV0MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/+z+GxUOBlsB\nmBymoGba5wnu+VQmtoCjunTZt/Kiud5RngBnhdwC7AlBUdv3+HWjvmSmPonJgwdD\nzCROyTKqRqNfMF0wDgYDVR0PAQH/BAQDAgGmMA8GA1UdJQQIMAYGBFUdJQAwDwYD\nVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgjH9byTqjSNJX6cShonn0pMN1UcwpurDN\nEMCyISDZERIwCgYIKoZIzj0EAwIDRwAwRAIgFBFjQ8USTGHxRwtMqE1o0OO2EwYp\nUQAhfpatqc+F/dICIFxH6CnCRUduSZeM3k5oIhy3wk4HkrEljn4PzUvedn5c\n-----END CERTIFICATE-----\n"
+            }
+        },
+        "peer1.org2.iot.net": {
+            "url": "grpcs://localhost:10051",
+            "eventUrl": "grpcs://localhost:10053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.org2.iot.net"
+            },
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICOTCCAeCgAwIBAgIRAMggyjddsIQDf/EEWpMMuCAwCgYIKoZIzj0EAwIwbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzIuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMi5pb3QubmV0MB4XDTE4MDgyMDE3MDc0MFoXDTI4MDgxNzE3MDc0MFowbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDG9yZzIuaW90Lm5ldDEbMBkGA1UEAxMSdGxzY2Eu\nb3JnMi5pb3QubmV0MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/+z+GxUOBlsB\nmBymoGba5wnu+VQmtoCjunTZt/Kiud5RngBnhdwC7AlBUdv3+HWjvmSmPonJgwdD\nzCROyTKqRqNfMF0wDgYDVR0PAQH/BAQDAgGmMA8GA1UdJQQIMAYGBFUdJQAwDwYD\nVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgjH9byTqjSNJX6cShonn0pMN1UcwpurDN\nEMCyISDZERIwCgYIKoZIzj0EAwIDRwAwRAIgFBFjQ8USTGHxRwtMqE1o0OO2EwYp\nUQAhfpatqc+F/dICIFxH6CnCRUduSZeM3k5oIhy3wk4HkrEljn4PzUvedn5c\n-----END CERTIFICATE-----\n"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.org1.iot.net": {
+            "url": "https://localhost:7054",
+            "caName": "ca-org1",
+            "httpOptions": {
+                "verify": false
+            }
+        },
+        "ca.org2.iot.net": {
+            "url": "https://localhost:8054",
+            "caName": "ca-org2",
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
