@@ -164,6 +164,8 @@ function networkUp() {
     echo "ERROR !!!! Unable to start network"
     exit 1
   fi
+
+  sleep 12
   # now run the end to end script
   docker exec cli scripts/script.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT $VERBOSE
   if [ $? -ne 0 ]; then
@@ -439,13 +441,14 @@ CLI_DELAY=3
 # channel name defaults to "mychannel"
 CHANNEL_NAME="mychannel"
 # use this as the default docker-compose yaml definition
-COMPOSE_FILE=docker-compose-cli.yaml
+# COMPOSE_FILE=docker-compose-cli.yaml
 #
 COMPOSE_FILE_COUCH=docker-compose-couch.yaml
 COMPOSE_FILE_CAS=docker-compose-cas.yaml
 # org3 docker compose file
 COMPOSE_FILE_ORG3=docker-compose-org3.yaml
-#
+# use this as the default docker-compose yaml definition
+COMPOSE_FILE=docker-compose-kafka.yaml
 # use golang as the default language for chaincode
 LANGUAGE=golang
 # default image tag

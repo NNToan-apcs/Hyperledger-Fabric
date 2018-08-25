@@ -1,0 +1,183 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer0.iot.net:
+  orderer1.iot.net:
+  peer0.org1.iot.net:
+  peer1.org1.iot.net:
+  peer0.org2.iot.net:
+  peer1.org2.iot.net:
+
+networks:
+  byfn:
+    
+services:
+
+  orderer0.iot.net:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer0.iot.net
+    container_name: orderer0.iot.net
+    depends_on:
+      - kafka0.iot.net
+      - kafka1.iot.net
+      - kafka2.iot.net
+      - kafka3.iot.net  
+    networks:
+      - byfn
+      
+  orderer1.iot.net:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer1.iot.net
+    container_name: orderer1.iot.net
+    depends_on:
+      - kafka0.iot.net
+      - kafka1.iot.net
+      - kafka2.iot.net
+      - kafka3.iot.net  
+    networks:
+      - byfn      
+
+  peer0.org1.iot.net:
+    container_name: peer0.org1.iot.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.org1.iot.net
+    networks:
+      - byfn      
+
+  peer1.org1.iot.net:
+    container_name: peer1.org1.iot.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.org1.iot.net
+    networks:
+      - byfn      
+      
+  peer0.org2.iot.net:
+    container_name: peer0.org2.iot.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.org2.iot.net
+    networks:
+      - byfn      
+
+  peer1.org2.iot.net:
+    container_name: peer1.org2.iot.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.org2.iot.net
+    networks:
+      - byfn
+
+  zookeeper0.iot.net:
+    container_name: zookeeper0.iot.net
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper0.iot.net
+    networks:
+      - byfn      
+
+  zookeeper1.iot.net:
+    container_name: zookeeper1.iot.net
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper1.iot.net
+    networks:
+      - byfn      
+
+  zookeeper2.iot.net:
+    container_name: zookeeper2.iot.net
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper2.iot.net
+    networks:
+      - byfn      
+
+  kafka0.iot.net:
+    container_name: kafka0.iot.net
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka0.iot.net
+    networks:
+      - byfn         
+    depends_on:
+      - zookeeper0.iot.net
+      - zookeeper1.iot.net
+      - zookeeper2.iot.net
+
+  kafka1.iot.net:
+    container_name: kafka1.iot.net
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka1.iot.net
+    networks:
+      - byfn         
+    depends_on:
+      - zookeeper0.iot.net
+      - zookeeper1.iot.net
+      - zookeeper2.iot.net
+
+  kafka2.iot.net:
+    container_name: kafka2.iot.net
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka2.iot.net
+    networks:
+      - byfn         
+    depends_on:
+      - zookeeper0.iot.net
+      - zookeeper1.iot.net
+      - zookeeper2.iot.net
+
+  kafka3.iot.net:
+    container_name: kafka3.iot.net
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka3.iot.net
+    networks:
+      - byfn         
+    depends_on:
+      - zookeeper0.iot.net
+      - zookeeper1.iot.net
+      - zookeeper2.iot.net
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.org1.iot.net:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.iot.net/peers/peer0.org1.iot.net/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.iot.net/peers/peer0.org1.iot.net/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.iot.net/peers/peer0.org1.iot.net/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.iot.net/users/Admin@org1.iot.net/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    #command: /bin/bash -c 'sleep 1000'
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./examples/chaincode/:/opt/gopath/src/github.com/chaincode
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    networks:
+      - byfn
+    depends_on:
+      - orderer0.iot.net
+      - orderer1.iot.net
+      - peer0.org2.iot.net
+      - peer1.org2.iot.net
+      - peer0.org1.iot.net
+      - peer1.org1.iot.net

@@ -7,30 +7,29 @@ version: '2'
 
 services:
 
-  orderer.iot.net:
-    container_name: orderer.iot.net
-    image: hyperledger/fabric-orderer:$IMAGE_TAG
-    environment:
-      - ORDERER_GENERAL_LOGLEVEL=INFO
-      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
-      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # enabled TLS
-      - ORDERER_GENERAL_TLS_ENABLED=true
-      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: orderer
+  orderer0.iot.net:
+    container_name: orderer0.iot.net
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
     volumes:
-    - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-    - ../crypto-config/ordererOrganizations/iot.net/orderers/orderer.iot.net/msp:/var/hyperledger/orderer/msp
-    - ../crypto-config/ordererOrganizations/iot.net/orderers/orderer.iot.net/tls/:/var/hyperledger/orderer/tls
-    - orderer.iot.net:/var/hyperledger/production/orderer
+      - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ../crypto-config/ordererOrganizations/iot.net/orderers/orderer0.iot.net/msp:/var/hyperledger/orderer/msp
+      - ../crypto-config/ordererOrganizations/iot.net/orderers/orderer0.iot.net/tls/:/var/hyperledger/orderer/tls
     ports:
       - 7050:7050
+  
+  orderer1.iot.net:
+    container_name: orderer1.iot.net
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
+    volumes:
+      - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ../crypto-config/ordererOrganizations/iot.net/orderers/orderer1.iot.net/msp:/var/hyperledger/orderer/msp
+      - ../crypto-config/ordererOrganizations/iot.net/orderers/orderer1.iot.net/tls/:/var/hyperledger/orderer/tls
+    ports:
+      - 8050:8050
 
   peer0.org1.iot.net:
     container_name: peer0.org1.iot.net
@@ -112,3 +111,83 @@ services:
     ports:
       - 10051:7051
       - 10053:7053
+
+  zookeeper0.iot.net:
+    container_name: zookeeper0.iot.net
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=1
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+
+  zookeeper1.iot.net:
+    container_name: zookeeper1.iot.net
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=2
+    ports:
+      - 12181:2181
+      - 12888:2888
+      - 13888:3888
+
+  zookeeper2.iot.net:
+    container_name: zookeeper2.iot.net
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=3
+    ports:
+      - 22181:2181
+      - 22888:2888
+      - 23888:3888
+
+  kafka0.iot.net:
+    container_name: kafka0.iot.net
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=0
+    ports:
+      - 9092:9092
+      - 9093:9093
+
+  kafka1.iot.net:
+    container_name: kafka1.iot.net
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=1
+    ports:
+      - 10092:9092
+      - 10093:9093
+
+  kafka2.iot.net:
+    container_name: kafka2.iot.net
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=2
+    ports:
+      - 11092:9092
+      - 11093:9093
+
+  kafka3.iot.net:
+    container_name: kafka3.iot.net
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=3
+    ports:
+      - 12092:9092
+      - 12093:9093
