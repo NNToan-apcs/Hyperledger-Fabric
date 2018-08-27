@@ -334,6 +334,8 @@ cat << EOF > $CONNECTION_ORG2/$NETWORK-org2.json
     }
 }
 EOF
+
+echo "============================= Connection profiles are created =============================================="
 composer card create -p $CONNECTION_ORG1/$NETWORK-org1.json -u PeerAdmin1 -c $CONNECTION_ORG1/Admin@org1.iot.net-cert.pem -k $CONNECTION_ORG1/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@$NETWORK-org1.card
 composer card create -p $CONNECTION_ORG2/$NETWORK-org2.json -u PeerAdmin2 -c $CONNECTION_ORG2/Admin@org2.iot.net-cert.pem -k $CONNECTION_ORG2/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@$NETWORK-org2.card
 
